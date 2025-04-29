@@ -1,8 +1,3 @@
-//update all distances to reachable nodes from currentNode before moving to the node with the smallest distance
-//be sure to calculate total distance when traveling to nodes, not just take into account their original set distance (the single path distance)
-//keep track of the node traveled from so the algorithm can know how to backtrack if necessary (?)
-//need goal node (?)
-
 function dijkstra(graph, sourceNode) {
     //var visited = [];
     var unvisited = []; //used to store nodes that haven't been visted yet
@@ -17,19 +12,21 @@ function dijkstra(graph, sourceNode) {
     console.log("updated shortestDist = ", shortestDist);
 
     let currentNode = sourceNode; //represents the node to be processed next. Set to sourceNode since sourceNode is the first node being processed
-    let minDist = Array(graph.length).fill(Infinity); //represents the shortest known distance among unvisited nodes. Used to know what node to travel to next (currentNode, the next unmarked node with the shortest distance). Initially set to infinity because a min distance hasn't been found yet
-    minDist[sourceNode] = 0;
-    console.log("minDist = ", minDist);
+    //let minDist = Array(graph.length).fill(Infinity); //represents the shortest known distance among unvisited nodes. Used to know what node to travel to next (currentNode, the next unmarked node with the shortest distance). Initially set to infinity because a min distance hasn't been found yet
+    //minDist[sourceNode] = 0;
+    //console.log("minDist = ", minDist);
     while (unvisited.length != 0) { //runs until all nodes have been processed (unvisited is empty)
         for (let column = 0; column < graph.length; column++) { //iterates over all nodes
             if (!unvisited.includes(column)) {
                 continue;
             }
             else if (graph[currentNode][column] > 0 && shortestDist[currentNode] + graph[currentNode][column] < shortestDist[column]) {
-                console.log(graph[currentNode][column], " > 0 and ", graph[currentNode][column], " < ", minDist[column]);
+                //let newDist = shortestDist[currentNode] + graph[currentNode][column];
+                console.log(graph[currentNode][column], " > 0 and ", shortestDist[currentNode] + graph[currentNode][column], " < ", shortestDist[column]);
                 console.log("column = ", column);
                 //console.log("shortestDist[unvisited[column]] = ", shortestDist[unvisited[column]]);
-                minDist[column] = graph[currentNode][column];
+                //minDist[column] = graph[currentNode][column];
+                shortestDist[column] = shortestDist[currentNode] + graph[currentNode][column];
             }
 
             // if (unvisited.includes(unvisited[column]) && shortestDist[column] > 0) {
@@ -40,25 +37,35 @@ function dijkstra(graph, sourceNode) {
             // }
 
         }
-        console.log("minDist after for loop = ", minDist);
+        console.log("shortestDist after for loop = ", shortestDist);
         //console.log("graph[currentNode][unvisited.indexOf(minDist)]")
-        let min = minDist[0];
-        console.log("original min = ", min);
-        for (let i = 0; i < minDist.length; i++) {
-            if (!unvisited.includes(i)) {
-                continue;
-            }
-            if (minDist[i] < min) {
-                console.log(minDist[i], " < ", min);
-                min = minDist[i];
-                console.log("new min = ", min);
+        //let min = minDist[0];
+        //console.log("original min = ", min);
+        // for (let i = 0; i < minDist.length; i++) {
+        //     if (!unvisited.includes(i)) {
+        //         continue;
+        //     }
+        //     if (minDist[i] < min) {
+        //         console.log(minDist[i], " < ", min);
+        //         min = minDist[i];
+        //         console.log("new min = ", min);
+        //     }
+        // }
+        // currentNode = minDist.indexOf(min);
+        // console.log("currentNode after for loop = ", currentNode);
+        unvisited = unvisited.filter(node => node !== currentNode); //remove the node being processed next (currentNode) from unvisited, as it will now be processed
+        let minDist = Infinity;
+        for (let column = 0; column < unvisited.length; column++) {
+            if (shortestDist[column] > 0 && shortestDist[column] < minDist) {
+                minDist = shortestDist[column];
+                console.log("minDist = ", minDist);
+                currentNode = column;
             }
         }
-        currentNode = minDist.indexOf(min);
-        console.log("currentNode after for loop = ", currentNode);
-        unvisited = unvisited.filter(node => node !== currentNode); //remove the node being processed next (currentNode) from unvisited, as it will now be processed
-        shortestDist[currentNode] = min;
-        console.log("new shortestDist = ", shortestDist);
+        console.log("new currentNode = ", currentNode);
+        
+        // shortestDist[currentNode] = min;
+        // console.log("new shortestDist = ", shortestDist);
 
         //shortestDist[currentNode] = Math.min(minDist, graph[currentNode]graph[sourceNode][graph[sourceNode].indexOf(minDist)];
         //console.log("updated shortestDist after for loop = ", shortestDist);
@@ -90,18 +97,3 @@ function dijkstra(graph, sourceNode) {
     }
     return shortestDist; //return the shortest distances from sourceNode to all other nodes
 }
-
-let matrix = [
-    [0, 2, 1, 4, 0, 0, 0, 0],
-    [0, 0, 1, 0, 10, 2, 0, 0],
-    [9, 0, 0, 0, 8, 0, 0, 0],
-    [0, 0, 2, 0, 0, 0, 0, 0],
-    [0, 0, 0, 7, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 3],
-    [0, 0, 0, 0, 4, 2, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0]
-];
-
-//console.log(matrix[2][matrix[2].indexOf(8)]);
-//console.log(matrix[2].indexOf(8));
-console.log(dijkstra(matrix, 2))
