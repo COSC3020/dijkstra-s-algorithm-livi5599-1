@@ -55,11 +55,11 @@ function dijkstra(graph, sourceNode) {
         // console.log("currentNode after for loop = ", currentNode);
         unvisited = unvisited.filter(node => node !== currentNode); //remove the node being processed next (currentNode) from unvisited, as it will now be processed
         let minDist = Infinity;
-        for (let column = 0; column < unvisited.length; column++) {
-            if (shortestDist[column] > 0 && shortestDist[column] < minDist) {
-                minDist = shortestDist[column];
+        for (let node of unvisited) {
+            if (shortestDist[node] > 0 && shortestDist[node] < minDist) {
+                minDist = shortestDist[node];
                 console.log("minDist = ", minDist);
-                currentNode = column;
+                currentNode = node;
             }
         }
         console.log("new currentNode = ", currentNode);
