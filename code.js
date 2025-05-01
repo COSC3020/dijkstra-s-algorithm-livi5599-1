@@ -20,11 +20,12 @@ function dijkstra(graph, sourceNode) {
         unvisited = unvisited.filter(node => node !== currentNode);
         let minDist = Infinity;
         for (let node of unvisited) {
-            if (shortestDist[node] > 0 && shortestDist[node] < minDist) {
+            if (shortestDist[node] < minDist) {
                 minDist = shortestDist[node];
                 currentNode = node;
             }
         }
+        if (currentNode === undefined) break;
     }
     return shortestDist;
 }
