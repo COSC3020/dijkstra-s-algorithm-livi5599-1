@@ -29,7 +29,7 @@ function dijkstra(graph, sourceNode) {
             return shortestDist;
         }
         
-        //if (currentNode === undefined) break;
+        if (currentNode === undefined) break;
     }
     return shortestDist;
 }
