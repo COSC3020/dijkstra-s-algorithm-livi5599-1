@@ -8,7 +8,7 @@ function dijkstra(graph, sourceNode) { //O(V^2)
     shortestDist[sourceNode] = 0; //O(1)
 
     let currentNode = sourceNode; //O(1)
-    while (unvisited.length != 0) { run V times -> O(V^2)
+    while (unvisited.length != 0) { //run V times -> O(V^2)
         for (let column = 0; column < graph.length; column++) { //runs V times -> O(V)
             if (!unvisited.includes(column)) { //O(1)
                 continue;
