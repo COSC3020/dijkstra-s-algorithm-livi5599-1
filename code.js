@@ -25,7 +25,11 @@ function dijkstra(graph, sourceNode) {
                 currentNode = node;
             }
         }
-        if (currentNode === undefined) break;
+        if (Math.min(shortestDist)) {
+            return shortestDist;
+        }
+        
+        //if (currentNode === undefined) break;
     }
     return shortestDist;
 }
