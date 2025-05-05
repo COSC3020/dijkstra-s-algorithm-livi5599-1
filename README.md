@@ -30,6 +30,6 @@ My implementation has a complexity of big $\Theta(V^2)$, where V is the number o
 
 -----
 
-I received help from Ali and ChatGPT.  Both of them mainly helped me understand the errors I was getting when I would attempt to test my code, especially if the test wouldn't pass or fail at all but would run infinitely.  ChatGPT also helped me understand more of how Dijkstra's algorithm works in depth, which helped me compare my code and its outcome with what should actually be happening.
+I received help from Ali and ChatGPT.  Both of them mainly helped me understand the errors I was getting when I would attempt to test my code, especially if the test wouldn't pass or fail at all but would run infinitely.  ChatGPT also helped me understand more of how Dijkstra's algorithm works in depth, which helped me compare my code and its outcome with what should actually be happening.  It also helped me write the test code.
 
 I certify that I have listed all sources used to complete this exercise, including the use of any Large Language Models.  All of the work is my own, except where stated otherwise.  I am aware that plagiarism carries severe penalties and that if plagiarism is suspected, charges may be filed against me without prior notice.
